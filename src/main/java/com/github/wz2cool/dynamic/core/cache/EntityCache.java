@@ -25,7 +25,21 @@ public final class EntityCache {
     private static final Map<Class, Map<String, PropertyInfo>> PROPERTY_INFO_CACHE = new ConcurrentHashMap<>();
     private static final String ENTITY_CLASS = "entityClass";
 
+    public PropertyInfo getPropertyInfo(Class entityClass, String propertyName) {
+        return getPropertyInfoMap(entityClass).get(propertyName);
+    }
+
     public Map<String, PropertyInfo> getPropertyInfoMap(Class entityClass) {
+        Map<String, PropertyInfo> map = PROPERTY_INFO_CACHE.get(entityClass);
+        if (Objects.nonNull(map)) {
+            return map;
+        }
+        map = getPropertyInfoMapInternal(entityClass);
+        PROPERTY_INFO_CACHE.put(entityClass, map);
+        return map;
+    }
+
+    public Map<String, PropertyInfo> getPropertyInfoMapInternal(Class entityClass) {
         if (Objects.isNull(entityClass)) {
             throw new NullPointerException(ENTITY_CLASS);
         }
