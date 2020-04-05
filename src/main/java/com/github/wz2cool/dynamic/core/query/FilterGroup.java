@@ -16,269 +16,269 @@ import java.util.function.UnaryOperator;
  * @author Frank
  * @date 2020/04/05
  **/
-public class FilterGroup<T> extends FilterGroupDescriptor {
+public class FilterGroup<T, S extends FilterGroup<T, S>> extends FilterGroupDescriptor {
 
-    public FilterGroup<T> and(
+    public S and(
             GetBigDecimalPropertyFunction<T> getPropertyFunc,
             IFilterOperator<BigDecimal> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetBigDecimalPropertyFunction<T> getPropertyFunc,
             IFilterOperator<BigDecimal> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetBigDecimalPropertyFunction<T> getPropertyFunc,
             IFilterOperator<BigDecimal> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetBigDecimalPropertyFunction<T> getPropertyFunc,
             IFilterOperator<BigDecimal> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetBytePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Byte> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetBytePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Byte> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetBytePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Byte> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetBytePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Byte> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetDatePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Date> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetDatePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Date> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetDatePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Date> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetDatePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Date> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetDoublePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Double> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetDoublePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Double> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetDoublePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Double> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetDoublePropertyFunction<T> getPropertyFunc,
             IFilterOperator<Double> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetFloatPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Float> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetFloatPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Float> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetFloatPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Float> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetFloatPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Float> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetIntegerPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Integer> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetIntegerPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Integer> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetIntegerPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Integer> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetIntegerPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Integer> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetLongPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Long> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetLongPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Long> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetLongPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Long> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetLongPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Long> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetShortPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Short> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetShortPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Short> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetShortPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Short> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetShortPropertyFunction<T> getPropertyFunc,
             IFilterOperator<Short> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             GetStringPropertyFunction<T> getPropertyFunc,
             IFilterOperator<String> filterOperator) {
         return and(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             GetStringPropertyFunction<T> getPropertyFunc,
             IFilterOperator<String> filterOperator) {
         return or(true, getPropertyFunc, filterOperator);
     }
 
-    public FilterGroup<T> and(
+    public S and(
             boolean enable,
             GetStringPropertyFunction<T> getPropertyFunc,
             IFilterOperator<String> filterOperator) {
         return filterInternal(FilterCondition.AND, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> or(
+    public S or(
             boolean enable,
             GetStringPropertyFunction<T> getPropertyFunc,
             IFilterOperator<String> filterOperator) {
         return filterInternal(FilterCondition.OR, getPropertyFunc, filterOperator.getOperator(), filterOperator.getValue(), enable);
     }
 
-    public FilterGroup<T> and(UnaryOperator<FilterGroup<T>> groupConsumer) {
+    public S and(UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         return and(true, groupConsumer);
     }
 
-    public FilterGroup<T> or(UnaryOperator<FilterGroup<T>> groupConsumer) {
+    public S or(UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         return or(true, groupConsumer);
     }
 
-    public FilterGroup<T> and(boolean enable, UnaryOperator<FilterGroup<T>> groupConsumer) {
+    public S and(boolean enable, UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         if (enable) {
-            FilterGroup<T> filterGroup = new FilterGroup<>();
+            FilterGroup<T, S> filterGroup = new FilterGroup<>();
             filterGroup.setCondition(FilterCondition.AND);
             this.addFilters(groupConsumer.apply(filterGroup));
         }
-        return this;
+        return (S) this;
     }
 
-    public FilterGroup<T> or(boolean enable, UnaryOperator<FilterGroup<T>> groupConsumer) {
+    public S or(boolean enable, UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         if (enable) {
-            FilterGroup<T> filterGroup = new FilterGroup<>();
+            FilterGroup<T, S> filterGroup = new FilterGroup<>();
             filterGroup.setCondition(FilterCondition.OR);
             this.addFilters(groupConsumer.apply(filterGroup));
         }
-        return this;
+        return (S) this;
     }
 
-    private <R extends Comparable> FilterGroup<T> filterInternal(
+    private <R extends Comparable> S filterInternal(
             FilterCondition condition,
             GetPropertyFunction<T, R> getPropertyFunc,
             FilterOperator operator, Object filterValue, boolean enable) {
@@ -291,6 +291,6 @@ public class FilterGroup<T> extends FilterGroupDescriptor {
             filterDescriptor.setValue(filterValue);
             this.addFilters(filterDescriptor);
         }
-        return this;
+        return (S) this;
     }
 }
