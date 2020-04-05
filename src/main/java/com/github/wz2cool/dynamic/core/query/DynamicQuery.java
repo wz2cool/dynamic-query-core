@@ -9,7 +9,7 @@ import com.github.wz2cool.dynamic.core.model.ISortDescriptor;
 public class DynamicQuery<T> extends FilterGroup<T, DynamicQuery<T>> {
     private ISortDescriptor[] sorts = new ISortDescriptor[]{};
     private boolean distinct = false;
-    private Class<T> clazz;
+    private Class<T> entityClass;
 
     public ISortDescriptor[] getSorts() {
         return sorts;
@@ -27,20 +27,20 @@ public class DynamicQuery<T> extends FilterGroup<T, DynamicQuery<T>> {
         this.distinct = distinct;
     }
 
-    public Class<T> getClazz() {
-        return clazz;
+    public Class<T> getEntityClass() {
+        return entityClass;
     }
 
-    public void setClazz(Class<T> clazz) {
-        this.clazz = clazz;
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
     public DynamicQuery() {
 
     }
 
-    public DynamicQuery(Class<T> clazz) {
-        this.clazz = clazz;
+    public DynamicQuery(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
     public static <T> DynamicQuery<T> createQuery(Class<T> clazz) {

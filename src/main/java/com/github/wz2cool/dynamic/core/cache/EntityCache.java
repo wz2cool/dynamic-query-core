@@ -39,7 +39,7 @@ public final class EntityCache {
         return map;
     }
 
-    public Map<String, PropertyInfo> getPropertyInfoMapInternal(Class entityClass) {
+    private Map<String, PropertyInfo> getPropertyInfoMapInternal(Class entityClass) {
         if (Objects.isNull(entityClass)) {
             throw new NullPointerException(ENTITY_CLASS);
         }
