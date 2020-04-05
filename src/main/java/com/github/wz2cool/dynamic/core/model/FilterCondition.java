@@ -1,4 +1,4 @@
-package com.github.wz2cool.dynamic.core;
+package com.github.wz2cool.dynamic.core.model;
 
 /**
  * The enum Filter condition.
