@@ -3,7 +3,7 @@ package com.github.wz2cool.dynamic.core.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ExampleModel {
+public class ExampleModel implements IEntity {
     private BigDecimal p1;
     private Byte p2;
     private Date p3;

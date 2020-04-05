@@ -27,17 +27,18 @@ public final class CommonsHelper {
         }
     }
 
-    static String getPropertyName(String methodName) {
+    public static String getPropertyName(String getMethodName) {
+        String setString = "set";
         String getString = "get";
         String isString = "is";
         int len;
-        if (methodName.startsWith(getString)) {
+        if (getMethodName.startsWith(getString) || getMethodName.startsWith(setString)) {
             len = getString.length();
-        } else if (methodName.startsWith(isString)) {
+        } else if (getMethodName.startsWith(isString)) {
             len = isString.length();
         } else {
             len = 0;
         }
-        return java.beans.Introspector.decapitalize(methodName.substring(len));
+        return java.beans.Introspector.decapitalize(getMethodName.substring(len));
     }
 }

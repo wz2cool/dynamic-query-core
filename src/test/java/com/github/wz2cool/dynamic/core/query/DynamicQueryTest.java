@@ -6,6 +6,7 @@ import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
 import com.github.wz2cool.dynamic.core.model.FilterOperator;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
 
@@ -34,5 +35,9 @@ public class DynamicQueryTest {
         assertEquals("p1", filterDescriptor.getPropertyName());
         assertEquals(FilterOperator.GREATER_THAN, filterDescriptor.getOperator());
         assertEquals(BigDecimal.ONE, filterDescriptor.getValue());
+
+        Method[] a = ExampleModel.class.getMethods();
+
+
     }
 }
