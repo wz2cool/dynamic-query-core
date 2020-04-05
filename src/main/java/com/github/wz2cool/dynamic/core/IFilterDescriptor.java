@@ -1,11 +1,9 @@
 package com.github.wz2cool.dynamic.core;
 
 /**
- *
- *
  * @author Frank
  */
-public interface BaseFilterDescriptor {
+public interface IFilterDescriptor {
     /**
      * get condition of and
      *
