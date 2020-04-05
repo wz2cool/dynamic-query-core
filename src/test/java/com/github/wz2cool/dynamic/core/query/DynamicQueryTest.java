@@ -21,13 +21,13 @@ public class DynamicQueryTest {
 
     @Test
     public void testConstructorDefaultValue() {
-        DynamicQuery<ExampleModel> filterGroup = new DynamicQuery<>();
+        DynamicQuery<ExampleModel> filterGroup = DynamicQuery.createQuery(ExampleModel.class);
         assertEquals(FilterCondition.AND, filterGroup.getCondition());
     }
 
     @Test
     public void testAddBigDecimalFilter() {
-        DynamicQuery<ExampleModel> filterGroup = new DynamicQuery<>();
+        DynamicQuery<ExampleModel> filterGroup = DynamicQuery.createQuery(ExampleModel.class);
         filterGroup.and(ExampleModel::getP1, greaterThan(BigDecimal.ONE));
         assertEquals(1, filterGroup.getFilters().length);
         FilterDescriptor filterDescriptor = (FilterDescriptor) filterGroup.getFilters()[0];
