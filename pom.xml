@@ -9,9 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <sonar.projectKey>wz2cool_dynamic-query-core</sonar.projectKey>
+        <sonar.organization>wz2cool-github</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>07811a835d11b0bde6377f01a9b97bde47287c03</sonar.login>
     </properties>
 
     <dependencies>
