@@ -15,6 +15,6 @@ public enum SortDirection implements Serializable {
     /**
      * Desc sort direction.
      */
-    DESC
+    DESCasdfasdf
 }
 
