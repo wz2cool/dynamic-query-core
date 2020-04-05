@@ -1,13 +1,12 @@
 package com.github.wz2cool.dynamic.core;
 
 
-import java.io.Serializable;
-
 /**
  * The enum Filter operator.
+ *
  * @author Frank
  */
-public enum FilterOperator implements Serializable {
+public enum FilterOperator {
     /**
      * Less than and operator.
      */
