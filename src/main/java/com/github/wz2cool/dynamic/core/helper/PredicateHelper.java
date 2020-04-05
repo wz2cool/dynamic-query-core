@@ -8,7 +8,10 @@ import java.util.Date;
  * @author Frank
  * @date 2020/03/15
  **/
-public class PredicateHelper {
+public final class PredicateHelper {
+
+    private PredicateHelper() {
+    }
 
     public static boolean test(Object propertyValue, FilterOperator operator, Object filterValue) {
         switch (operator) {

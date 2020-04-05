@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static com.github.wz2cool.dynamic.core.query.Expression.greaterThan;
 import static com.github.wz2cool.dynamic.core.query.Expression.lessThan;
 
 /**
@@ -23,6 +24,7 @@ public class MemoryFilterTest {
     @Test
     public void test() {
         DynamicQuery<ExampleModel> query = DynamicQuery.createQuery(ExampleModel.class)
+                .and(ExampleModel::getP1, greaterThan(BigDecimal.ONE))
                 .and(ExampleModel::getP1, lessThan(BigDecimal.TEN));
         Predicate<ExampleModel> predicate = MemoryFilter.getPredicate(query);
 
@@ -36,7 +38,8 @@ public class MemoryFilterTest {
         for (int i = 0; i < 10; i++) {
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
-            List<ExampleModel> result = dataList.stream().filter(x -> x.getP1().compareTo(BigDecimal.TEN) < 0).collect(Collectors.toList());
+            List<ExampleModel> result = dataList.stream().filter(x ->
+                    x.getP1().compareTo(BigDecimal.ONE) > 0 && x.getP1().compareTo(BigDecimal.TEN) < 0).collect(Collectors.toList());
             stopWatch.stop();
             System.out.println("plain: " + stopWatch.getTime());
         }
