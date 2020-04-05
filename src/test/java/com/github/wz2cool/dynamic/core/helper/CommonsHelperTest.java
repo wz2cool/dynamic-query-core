@@ -9,19 +9,19 @@ import static org.junit.Assert.assertEquals;
  * @author Frank
  * @date 2020/04/05
  **/
-public class CommonHelperTest {
+public class CommonsHelperTest {
 
     @Test
     public void testGetPropertyName() {
-        String propertyName = CommonHelper.getPropertyName(ExampleModel::getP1);
+        String propertyName = CommonsHelper.getPropertyName(ExampleModel::getP1);
         assertEquals("p1", propertyName);
     }
 
     @Test
     public void testGetPropertyNameInternal() {
-        String booleanPropertyName = CommonHelper.getPropertyName("isBoolean");
-        String getPropertyName = CommonHelper.getPropertyName("getName");
-        String propertyName = CommonHelper.getPropertyName("name");
+        String booleanPropertyName = CommonsHelper.getPropertyName("isBoolean");
+        String getPropertyName = CommonsHelper.getPropertyName("getName");
+        String propertyName = CommonsHelper.getPropertyName("name");
         assertEquals("boolean", booleanPropertyName);
         assertEquals("name", getPropertyName);
         assertEquals("name", propertyName);

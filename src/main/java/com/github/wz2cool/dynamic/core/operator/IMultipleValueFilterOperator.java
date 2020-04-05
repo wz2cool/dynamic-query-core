@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Frank
  */
-public interface IMultipleValueFilterOperator<T> extends IFilterOperator {
+public interface IMultipleValueFilterOperator<T> extends IFilterOperator<T> {
     /**
      * Get and value.
      *

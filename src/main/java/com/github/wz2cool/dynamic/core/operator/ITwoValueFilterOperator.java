@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Frank
  */
-public interface ITwoValueFilterOperator<T> extends IFilterOperator {
+public interface ITwoValueFilterOperator<T> extends IFilterOperator<T> {
     /**
      * Get and value.
      *

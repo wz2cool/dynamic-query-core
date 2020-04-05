@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
  * @author Frank
  * @date 2020/04/05
  **/
-public final class CommonHelper {
+public final class CommonsHelper {
 
-    private CommonHelper() {
+    private CommonsHelper() {
     }
 
     public static <T, R extends Comparable> String getPropertyName(GetPropertyFunction<T, R> fn) {

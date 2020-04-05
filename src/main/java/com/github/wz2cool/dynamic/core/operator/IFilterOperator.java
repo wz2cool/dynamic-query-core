@@ -5,8 +5,8 @@ import com.github.wz2cool.dynamic.core.model.FilterOperator;
 /**
  * @author Frank
  */
-@SuppressWarnings("squid:S2326")
-public interface IFilterOperator {
+@SuppressWarnings("java:S2326")
+public interface IFilterOperator<T> {
     /**
      * Get and operator.
      *
