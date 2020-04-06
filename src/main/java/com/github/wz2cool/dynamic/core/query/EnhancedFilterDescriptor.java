@@ -1,19 +1,20 @@
 package com.github.wz2cool.dynamic.core.query;
 
 import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
-import com.github.wz2cool.dynamic.core.model.PropertyInfo;
+
+import java.util.function.Function;
 
 /**
  * @author Frank
  */
 public class EnhancedFilterDescriptor extends FilterDescriptor {
-    private PropertyInfo propertyInfo;
+    private Function propertyFunc;
 
-    public PropertyInfo getPropertyInfo() {
-        return propertyInfo;
+    public Function getPropertyFunc() {
+        return propertyFunc;
     }
 
-    public void setPropertyInfo(PropertyInfo propertyInfo) {
-        this.propertyInfo = propertyInfo;
+    public void setPropertyFunc(Function propertyFunc) {
+        this.propertyFunc = propertyFunc;
     }
 }

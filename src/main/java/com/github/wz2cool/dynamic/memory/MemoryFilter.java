@@ -9,6 +9,7 @@ import com.github.wz2cool.dynamic.core.model.FilterGroupDescriptor;
 import com.github.wz2cool.dynamic.core.model.IFilterDescriptor;
 import com.github.wz2cool.dynamic.core.query.DynamicQuery;
 import com.github.wz2cool.dynamic.core.query.EnhancedFilterDescriptor;
+import javafx.print.Printer;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -31,19 +32,27 @@ public final class MemoryFilter {
     }
 
     private static <T> Predicate<T> getPredicate(Class<T> clazz, IFilterDescriptor[] filters) {
-        Predicate<T> predicate = (obj) -> true;
+        Predicate<T> predicate = null;
         for (IFilterDescriptor filter : filters) {
             if (filter instanceof FilterGroupDescriptor) {
-                if (filter.getCondition() == FilterCondition.OR) {
-                    predicate = predicate.or(getPredicate(clazz, (FilterGroupDescriptor) filter));
+                if (Objects.isNull(predicate)) {
+                    predicate = getPredicate(clazz, (FilterGroupDescriptor) filter);
                 } else {
-                    predicate = predicate.and(getPredicate(clazz, (FilterGroupDescriptor) filter));
+                    if (filter.getCondition() == FilterCondition.OR) {
+                        predicate = predicate.or(getPredicate(clazz, (FilterGroupDescriptor) filter));
+                    } else {
+                        predicate = predicate.and(getPredicate(clazz, (FilterGroupDescriptor) filter));
+                    }
                 }
             } else if (filter instanceof FilterDescriptor) {
-                if (filter.getCondition() == FilterCondition.OR) {
-                    predicate = predicate.or(getPredicate(clazz, (FilterDescriptor) filter));
+                if (Objects.isNull(predicate)) {
+                    predicate = getPredicate(clazz, (FilterDescriptor) filter);
                 } else {
-                    predicate = predicate.and(getPredicate(clazz, (FilterDescriptor) filter));
+                    if (filter.getCondition() == FilterCondition.OR) {
+                        predicate = predicate.or(getPredicate(clazz, (FilterDescriptor) filter));
+                    } else {
+                        predicate = predicate.and(getPredicate(clazz, (FilterDescriptor) filter));
+                    }
                 }
             }
         }
@@ -59,9 +68,8 @@ public final class MemoryFilter {
             Function method;
             if (filterDescriptor instanceof EnhancedFilterDescriptor) {
                 EnhancedFilterDescriptor enhancedFilterDescriptor = (EnhancedFilterDescriptor) filterDescriptor;
-                if (Objects.nonNull(enhancedFilterDescriptor.getPropertyInfo())
-                        && Objects.nonNull(enhancedFilterDescriptor.getPropertyInfo().getPropertyFunc())) {
-                    method = ((EnhancedFilterDescriptor) filterDescriptor).getPropertyInfo().getPropertyFunc();
+                if (Objects.nonNull(enhancedFilterDescriptor.getPropertyFunc())) {
+                    method = ((EnhancedFilterDescriptor) filterDescriptor).getPropertyFunc();
                 } else {
                     method = ENTITY_CACHE.getPropertyInfo(clazz, filterDescriptor.getPropertyName()).getPropertyFunc();
                 }

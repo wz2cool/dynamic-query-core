@@ -63,8 +63,7 @@ public class DynamicQuery<T> extends BaseFilterGroup<T, DynamicQuery<T>> {
             filterDescriptor.setPropertyName(propertyName);
             filterDescriptor.setOperator(operator);
             filterDescriptor.setValue(filterValue);
-            PropertyInfo propertyInfo = entityCache.getPropertyInfo(entityClass, propertyName);
-            filterDescriptor.setPropertyInfo(propertyInfo);
+            filterDescriptor.setPropertyFunc(getPropertyFunc);
             this.addFilters(filterDescriptor);
         }
         return this;
