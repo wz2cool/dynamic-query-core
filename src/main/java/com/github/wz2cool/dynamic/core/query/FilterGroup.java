@@ -1,9 +1,11 @@
 package com.github.wz2cool.dynamic.core.query;
 
-import com.github.wz2cool.dynamic.core.cache.EntityCache;
 import com.github.wz2cool.dynamic.core.helper.CommonsHelper;
 import com.github.wz2cool.dynamic.core.lambda.*;
-import com.github.wz2cool.dynamic.core.model.*;
+import com.github.wz2cool.dynamic.core.model.FilterCondition;
+import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
+import com.github.wz2cool.dynamic.core.model.FilterGroupDescriptor;
+import com.github.wz2cool.dynamic.core.model.FilterOperator;
 import com.github.wz2cool.dynamic.core.operator.IFilterOperator;
 
 import java.math.BigDecimal;
@@ -15,13 +17,6 @@ import java.util.function.UnaryOperator;
  * @date 2020/04/05
  **/
 public class FilterGroup<T, S extends FilterGroup<T, S>> extends FilterGroupDescriptor {
-    private final EntityCache entityCache = EntityCache.getInstance();
-
-    private Class<T> entityClass;
-
-    public FilterGroup(Class<T> entityClass) {
-        this.entityClass = entityClass;
-    }
 
     public S and(
             GetBigDecimalPropertyFunction<T> getPropertyFunc,
@@ -267,7 +262,7 @@ public class FilterGroup<T, S extends FilterGroup<T, S>> extends FilterGroupDesc
 
     public S and(boolean enable, UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         if (enable) {
-            FilterGroup<T, S> filterGroup = new FilterGroup<>(this.entityClass);
+            FilterGroup<T, S> filterGroup = new FilterGroup<>();
             filterGroup.setCondition(FilterCondition.AND);
             this.addFilters(groupConsumer.apply(filterGroup));
         }
@@ -276,26 +271,24 @@ public class FilterGroup<T, S extends FilterGroup<T, S>> extends FilterGroupDesc
 
     public S or(boolean enable, UnaryOperator<FilterGroup<T, S>> groupConsumer) {
         if (enable) {
-            FilterGroup<T, S> filterGroup = new FilterGroup<>(this.entityClass);
+            FilterGroup<T, S> filterGroup = new FilterGroup<>();
             filterGroup.setCondition(FilterCondition.OR);
             this.addFilters(groupConsumer.apply(filterGroup));
         }
         return (S) this;
     }
 
-    private <R extends Comparable> S filterInternal(
+    protected <R extends Comparable> S filterInternal(
             FilterCondition condition,
             GetPropertyFunction<T, R> getPropertyFunc,
             FilterOperator operator, Object filterValue, boolean enable) {
         if (enable) {
-            EnhancedFilterDescriptor filterDescriptor = new EnhancedFilterDescriptor();
+            FilterDescriptor filterDescriptor = new FilterDescriptor();
             String propertyName = CommonsHelper.getPropertyName(getPropertyFunc);
             filterDescriptor.setCondition(condition);
             filterDescriptor.setPropertyName(propertyName);
             filterDescriptor.setOperator(operator);
             filterDescriptor.setValue(filterValue);
-            PropertyInfo propertyInfo = entityCache.getPropertyInfo(entityClass, propertyName);
-            filterDescriptor.setPropertyInfo(propertyInfo);
             this.addFilters(filterDescriptor);
         }
         return (S) this;
