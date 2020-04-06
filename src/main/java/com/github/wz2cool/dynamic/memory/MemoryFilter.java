@@ -8,9 +8,10 @@ import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
 import com.github.wz2cool.dynamic.core.model.FilterGroupDescriptor;
 import com.github.wz2cool.dynamic.core.model.IFilterDescriptor;
 import com.github.wz2cool.dynamic.core.query.DynamicQuery;
+import com.github.wz2cool.dynamic.core.query.EnhancedFilterDescriptor;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -55,11 +56,22 @@ public final class MemoryFilter {
 
     private static <T> Predicate<T> getPredicate(Class<T> clazz, FilterDescriptor filterDescriptor) {
         return (T obj) -> {
-            Method method = ENTITY_CACHE.getPropertyInfo(clazz, filterDescriptor.getPropertyName()).getPropertyMethod();
+            Function method;
+            if (filterDescriptor instanceof EnhancedFilterDescriptor) {
+                EnhancedFilterDescriptor enhancedFilterDescriptor = (EnhancedFilterDescriptor) filterDescriptor;
+                if (Objects.nonNull(enhancedFilterDescriptor.getPropertyInfo())
+                        && Objects.nonNull(enhancedFilterDescriptor.getPropertyInfo().getPropertyFunc())) {
+                    method = ((EnhancedFilterDescriptor) filterDescriptor).getPropertyInfo().getPropertyFunc();
+                } else {
+                    method = ENTITY_CACHE.getPropertyInfo(clazz, filterDescriptor.getPropertyName()).getPropertyFunc();
+                }
+            } else {
+                method = ENTITY_CACHE.getPropertyInfo(clazz, filterDescriptor.getPropertyName()).getPropertyFunc();
+            }
             try {
-                Object propertyValue = method.invoke(obj);
+                Object propertyValue = method.apply(obj);
                 return PredicateHelper.test(propertyValue, filterDescriptor.getOperator(), filterDescriptor.getValue());
-            } catch (IllegalAccessException | InvocationTargetException e) {
+            } catch (Exception e) {
                 throw new InternalRuntimeException(e);
             }
         };

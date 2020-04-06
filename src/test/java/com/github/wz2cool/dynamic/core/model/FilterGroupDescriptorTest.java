@@ -1,9 +1,5 @@
 package com.github.wz2cool.dynamic.core.model;
 
-import com.github.wz2cool.dynamic.core.model.FilterCondition;
-import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
-import com.github.wz2cool.dynamic.core.model.FilterGroupDescriptor;
-import com.github.wz2cool.dynamic.core.model.FilterOperator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

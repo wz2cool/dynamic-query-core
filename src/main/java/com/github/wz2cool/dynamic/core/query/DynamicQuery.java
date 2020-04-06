@@ -35,11 +35,8 @@ public class DynamicQuery<T> extends FilterGroup<T, DynamicQuery<T>> {
         this.entityClass = entityClass;
     }
 
-    public DynamicQuery() {
-
-    }
-
     public DynamicQuery(Class<T> entityClass) {
+        super(entityClass);
         this.entityClass = entityClass;
     }
 

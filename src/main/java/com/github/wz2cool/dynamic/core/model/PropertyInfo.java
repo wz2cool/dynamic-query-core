@@ -1,6 +1,6 @@
 package com.github.wz2cool.dynamic.core.model;
 
-import java.lang.reflect.Method;
+import java.util.function.Function;
 
 /**
  * @author Frank
@@ -13,7 +13,7 @@ public class PropertyInfo {
      */
     private String propertyName;
     private Class propertyType;
-    private Method propertyMethod;
+    private Function propertyFunc;
 
     public String getPropertyName() {
         return propertyName;
@@ -31,11 +31,11 @@ public class PropertyInfo {
         this.propertyType = propertyType;
     }
 
-    public Method getPropertyMethod() {
-        return propertyMethod;
+    public Function getPropertyFunc() {
+        return propertyFunc;
     }
 
-    public void setPropertyMethod(Method propertyMethod) {
-        this.propertyMethod = propertyMethod;
+    public void setPropertyFunc(Function propertyFunc) {
+        this.propertyFunc = propertyFunc;
     }
 }

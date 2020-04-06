@@ -1,11 +1,17 @@
 package com.github.wz2cool.dynamic.core.cache;
 
+import com.github.wz2cool.dynamic.core.exception.InternalRuntimeException;
 import com.github.wz2cool.dynamic.core.helper.CommonsHelper;
 import com.github.wz2cool.dynamic.core.model.PropertyInfo;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.LambdaMetafactory;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 /**
  * @author Frank
@@ -40,23 +46,36 @@ public final class EntityCache {
     }
 
     private Map<String, PropertyInfo> getPropertyInfoMapInternal(Class entityClass) {
-        if (Objects.isNull(entityClass)) {
-            throw new NullPointerException(ENTITY_CLASS);
+        try {
+            if (Objects.isNull(entityClass)) {
+                throw new NullPointerException(ENTITY_CLASS);
+            }
+            Map<String, PropertyInfo> result = new HashMap<>();
+            // get all public methods
+            Method[] publicMethods = entityClass.getMethods();
+            List<Method> getMethodList = getPropertyGetMethodList(publicMethods);
+            for (Method getMethod : getMethodList) {
+                getMethod.setAccessible(true);
+                String methodName = getMethod.getName();
+                String propertyName = CommonsHelper.getPropertyName(methodName);
+
+                MethodHandles.Lookup lookup = MethodHandles.lookup();
+                CallSite site = LambdaMetafactory.metafactory(lookup,
+                        "apply",
+                        MethodType.methodType(Function.class),
+                        MethodType.methodType(Object.class, Object.class),
+                        lookup.findVirtual(entityClass, methodName, MethodType.methodType(getMethod.getReturnType())),
+                        MethodType.methodType(getMethod.getReturnType(), entityClass));
+                Function getterFunction = (Function) site.getTarget().invokeExact();
+                PropertyInfo propertyInfo = new PropertyInfo();
+                propertyInfo.setPropertyName(propertyName);
+                propertyInfo.setPropertyFunc(getterFunction);
+                result.put(propertyName, propertyInfo);
+            }
+            return result;
+        } catch (Throwable ex) {
+            throw new InternalRuntimeException(ex);
         }
-        Map<String, PropertyInfo> result = new HashMap<>();
-        // get all public methods
-        Method[] publicMethods = entityClass.getMethods();
-        List<Method> getMethodList = getPropertyGetMethodList(publicMethods);
-        for (Method getMethod : getMethodList) {
-            getMethod.setAccessible(true);
-            String methodName = getMethod.getName();
-            String propertyName = CommonsHelper.getPropertyName(methodName);
-            PropertyInfo propertyInfo = new PropertyInfo();
-            propertyInfo.setPropertyName(propertyName);
-            propertyInfo.setPropertyMethod(getMethod);
-            result.put(propertyName, propertyInfo);
-        }
-        return result;
     }
 
     private List<Method> getPropertyGetMethodList(Method[] methods) {

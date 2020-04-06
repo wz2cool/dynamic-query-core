@@ -19,7 +19,7 @@ public class EntityCacheTest {
         ExampleModel exampleModel = new ExampleModel();
         exampleModel.setP1(BigDecimal.TEN);
 
-        Object result = propertyInfoMap.get("p1").getPropertyMethod().invoke(exampleModel);
+        Object result = propertyInfoMap.get("p1").getPropertyFunc().apply(exampleModel);
         System.out.println(result);
     }
 }
