@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
  * @author Frank
  * @date 2020/04/05
  **/
-public class FilterGroupDescriptorTest {
+public class BaseFilterGroupDescriptorTest {
 
     @Test
     public void testConstructorForDefaultValue() {
