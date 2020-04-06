@@ -65,6 +65,9 @@ public final class MemoryFilter {
 
     private static <T> Predicate<T> getPredicate(Class<T> clazz, FilterDescriptor filterDescriptor) {
         return (T obj) -> {
+            if (Objects.isNull(obj)) {
+                return false;
+            }
             Function method;
             if (filterDescriptor instanceof EnhancedFilterDescriptor) {
                 EnhancedFilterDescriptor enhancedFilterDescriptor = (EnhancedFilterDescriptor) filterDescriptor;
