@@ -1,7 +1,6 @@
 package com.github.wz2cool.dynamic.memory;
 
 import com.github.wz2cool.dynamic.core.cache.EntityCache;
-import com.github.wz2cool.dynamic.core.exception.InternalRuntimeException;
 import com.github.wz2cool.dynamic.core.helper.PredicateHelper;
 import com.github.wz2cool.dynamic.core.model.FilterCondition;
 import com.github.wz2cool.dynamic.core.model.FilterDescriptor;
@@ -9,7 +8,6 @@ import com.github.wz2cool.dynamic.core.model.FilterGroupDescriptor;
 import com.github.wz2cool.dynamic.core.model.IFilterDescriptor;
 import com.github.wz2cool.dynamic.core.query.DynamicQuery;
 import com.github.wz2cool.dynamic.core.query.EnhancedFilterDescriptor;
-import javafx.print.Printer;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -79,12 +77,8 @@ public final class MemoryFilter {
             } else {
                 method = ENTITY_CACHE.getPropertyInfo(clazz, filterDescriptor.getPropertyName()).getPropertyFunc();
             }
-            try {
-                Object propertyValue = method.apply(obj);
-                return PredicateHelper.test(propertyValue, filterDescriptor.getOperator(), filterDescriptor.getValue());
-            } catch (Exception e) {
-                throw new InternalRuntimeException(e);
-            }
+            Object propertyValue = method.apply(obj);
+            return PredicateHelper.test(propertyValue, filterDescriptor.getOperator(), filterDescriptor.getValue());
         };
     }
 }

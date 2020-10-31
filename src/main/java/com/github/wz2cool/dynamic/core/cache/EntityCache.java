@@ -14,9 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /**
+ * Entity cache
+ * 实体缓存
+ *
  * @author Frank
  * @date 2020/04/05
  **/
+@SuppressWarnings({"java:S3011", "java:S374", "java:S3740"})
 public final class EntityCache {
 
     private static final EntityCache INSTANCE = new EntityCache();
@@ -31,11 +35,19 @@ public final class EntityCache {
     private static final Map<Class, Map<String, PropertyInfo>> PROPERTY_INFO_CACHE = new ConcurrentHashMap<>();
     private static final String ENTITY_CLASS = "entityClass";
 
+    /**
+     * get property info of entity class
+     * 获取目标对象的属性（C# 里的属性为同时拥有get/set 方法）
+     *
+     * @param entityClass  entity class 实体类
+     * @param propertyName the name of property 属性名
+     * @return propery info of entity class
+     */
     public PropertyInfo getPropertyInfo(Class entityClass, String propertyName) {
         return getPropertyInfoMap(entityClass).get(propertyName);
     }
 
-    public Map<String, PropertyInfo> getPropertyInfoMap(Class entityClass) {
+    private Map<String, PropertyInfo> getPropertyInfoMap(Class entityClass) {
         Map<String, PropertyInfo> map = PROPERTY_INFO_CACHE.get(entityClass);
         if (Objects.nonNull(map)) {
             return map;

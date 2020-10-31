@@ -24,10 +24,14 @@ public class MemoryFilterTest {
     @Test
     public void test() {
         DynamicQuery<ExampleModel> query = DynamicQuery.createQuery(ExampleModel.class)
-                .and(g -> g.and(ExampleModel::getP1, greaterThan(BigDecimal.ONE))
-                        .and(ExampleModel::getP1, lessThan(BigDecimal.TEN)))
-                .and(g -> g.and(ExampleModel::getP6, greaterThan(1))
-                        .and(ExampleModel::getP6, lessThan(9)));
+                /* .and(g -> g.and(ExampleModel::getP1, greaterThan(BigDecimal.ONE))
+                         .and(ExampleModel::getP1, lessThan(BigDecimal.TEN)))
+                 .and(g -> g.and(ExampleModel::getP6, greaterThan(1))
+                         .and(ExampleModel::getP6, lessThan(9)));*/
+                .and(ExampleModel::getP1, greaterThan(BigDecimal.ONE))
+                .and(ExampleModel::getP1, lessThan(BigDecimal.TEN))
+                .and(ExampleModel::getP6, greaterThan(1))
+                .and(ExampleModel::getP6, lessThan(9));
         Predicate<ExampleModel> predicate = MemoryFilter.getPredicate(query);
 
         List<ExampleModel> dataList = new ArrayList<>();
