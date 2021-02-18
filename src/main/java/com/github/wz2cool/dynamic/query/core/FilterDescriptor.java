@@ -5,12 +5,12 @@ package com.github.wz2cool.dynamic.query.core;
  *
  * @author Frank
  **/
-public class FilterDescriptor implements IFilterDescriptor {
+public class FilterDescriptor<T> implements IFilterDescriptor {
 
     private FilterCondition condition = FilterCondition.AND;
     private FilterOperator operator = FilterOperator.EQUAL;
     private String propertyName;
-    private Object value;
+    private T value;
 
     /**
      * get condition
@@ -71,7 +71,7 @@ public class FilterDescriptor implements IFilterDescriptor {
      *
      * @return the value to which the field is compared
      */
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
@@ -80,7 +80,7 @@ public class FilterDescriptor implements IFilterDescriptor {
      *
      * @param value the value need to set
      */
-    public void setValue(Object value) {
+    public void setValue(T value) {
         this.value = value;
     }
 }
